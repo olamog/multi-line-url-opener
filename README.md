@@ -46,10 +46,11 @@ A Chrome browser extension that lets you highlight multiple lines of text, right
 
 ## Permissions
 
-| Permission    | Reason                                                 |
-|---------------|--------------------------------------------------------|
-| `contextMenus`| Required to add the right-click menu item.            |
-| `activeTab`   | Required to read the selected text on the active tab. |
+| Permission    | Reason                                                        |
+|---------------|---------------------------------------------------------------|
+| `contextMenus`| Required to add the right-click menu item.                   |
+| `activeTab`   | Grants access to the active tab when the user invokes the extension. |
+| `scripting`   | Required to read the selected text with line breaks preserved.|
 
 ## Compatibility
 

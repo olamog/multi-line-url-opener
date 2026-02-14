@@ -8,12 +8,24 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 // Handle the context menu click
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId !== "open-lines-as-tabs" || !info.selectionText) {
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  if (info.menuItemId !== "open-lines-as-tabs" || !tab?.id) {
     return;
   }
 
-  const lines = info.selectionText.split(/\r?\n/).filter((line) => line.trim());
+  // info.selectionText strips newlines, so inject a script to get the
+  // actual selection which preserves line breaks.
+  const [result] = await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: () => window.getSelection().toString(),
+  });
+
+  const selectionText = result?.result;
+  if (!selectionText) {
+    return;
+  }
+
+  const lines = selectionText.split(/\r?\n/).filter((line) => line.trim());
 
   for (const line of lines) {
     let url = line.trim();

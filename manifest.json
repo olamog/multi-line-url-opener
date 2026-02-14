@@ -3,7 +3,7 @@
   "name": "Multi Line URL Opener",
   "version": "1.0.0",
   "description": "Highlight multiple lines of text, right-click, and open each line as a URL in a separate new tab.",
-  "permissions": ["contextMenus", "activeTab"],
+  "permissions": ["contextMenus", "activeTab", "scripting"],
   "background": {
     "service_worker": "background.js"
   },
